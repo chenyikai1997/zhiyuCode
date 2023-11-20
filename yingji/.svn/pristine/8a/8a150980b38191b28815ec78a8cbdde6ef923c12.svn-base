@@ -1,0 +1,825 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="RectifyInfoMapper">
+
+	<resultMap type="RectifyInfo" id="rectifyinfoResultMap">
+		<result column="RECTIFY_ID" property="RECTIFY_ID"/>
+		<result column="ORG_ID" property="ORG_ID"/>
+		<result column="SORT" property="SORT"/>
+		<result column="ISDEL" property="ISDEL"/>
+		<result column="CREATER" property="CREATER"/>
+		<result column="CREATE_DATE" property="CREATE_DATE"/>
+		<result column="MODIFYER" property="MODIFYER"/>
+		<result column="MODIFY_DATE" property="MODIFY_DATE"/>
+		<result column="FILE_CODE" property="FILE_CODE"/>
+		<result column="PROJECT_NAME" property="PROJECT_NAME"/>
+		<result column="IMG_URL" property="IMG_URL"/>
+		<result column="RECTIFY_MEASURES" property="RECTIFY_MEASURES"/>
+		<result column="HIDDEN_DANGER_INFO" property="HIDDEN_DANGER_INFO"/>
+		<result column="RECTIFY_MEASURES" property="RECTIFY_MEASURES"/>
+		<result column="HIDDEN_DANGER_CLASSIFY" property="HIDDEN_DANGER_CLASSIFY"/>
+		<result column="HIDDEN_DANGER_LEVEL" property="HIDDEN_DANGER_LEVEL"/>
+		<result column="HIDDEN_DANGER_FACTOR" property="HIDDEN_DANGER_FACTOR"/>
+		<result column="IS_SUBMITE" property="IS_SUBMITE"/>
+		<result column="IS_COMPLETE" property="IS_COMPLETE"/>
+		<result column="COMPLETE_TIME" property="COMPLETE_TIME"/>
+		<result column="PERSON_RESPONSIBLE" property="PERSON_RESPONSIBLE"/>
+		<result column="RECTIFY_INVESTMENT" property="RECTIFY_INVESTMENT"/>
+		<result column="PLAN_COMPLETE_TIME" property="PLAN_COMPLETE_TIME"/>
+		<result column="COMMIT_TIME" property="COMMIT_TIME"/>
+		<result column="YEAR" property="YEAR"/>
+		<result column="MONTH" property="MONTH"/>
+		<result column="DAY" property="DAY"/>
+		<result column="QUARTER" property="QUARTER"/>
+		<result column="REMARK" property="REMARK"/>
+		<result column="RECTIFY_STAGE" property="RECTIFY_STAGE"/>
+		<result column="RESPONSIBLE_UNIT" property="RESPONSIBLE_UNIT"/>
+		<result column="REPORTING_UNIT" property="REPORTING_UNIT"/>
+		<result column="REPORTING_PERSON" property="REPORTING_PERSON"/>
+		<result column="RECTIFYINFO_AREA" property="RECTIFYINFO_AREA"/>
+		<result column="RECTIFYINFO_NUMBER" property="RECTIFYINFO_NUMBER"/>
+	</resultMap>
+	
+	<!--表名 -->
+	<sql id="tableName">
+		M_RECTIFY_INFO
+	</sql>
+	
+	<!-- 字段 -->
+	<sql id="Field">
+		RECTIFY_ID,
+		ORG_ID,
+		SORT,
+		ISDEL,
+		CREATER,
+		CREATE_DATE,
+		MODIFYER,
+		MODIFY_DATE,
+		FILE_CODE,
+		PROJECT_NAME,
+		IMG_URL,
+		HIDDEN_DANGER_INFO,
+		RECTIFY_MEASURES,
+		HIDDEN_DANGER_CLASSIFY,
+		HIDDEN_DANGER_LEVEL,
+		HIDDEN_DANGER_FACTOR,
+		IS_SUBMITE,
+		IS_COMPLETE,
+		COMPLETE_TIME,
+		PERSON_RESPONSIBLE,
+		RECTIFY_INVESTMENT,
+		PLAN_COMPLETE_TIME,
+		COMMIT_TIME,
+		YEAR,
+		MONTH,
+		DAY,
+		QUARTER,
+		REMARK,
+		RECTIFY_STAGE,
+		RESPONSIBLE_UNIT,
+		REPORTING_UNIT,
+		REPORTING_PERSON,
+		REPORTING_UNIT_FIRST,
+		REPORTING_PERSON_FIRST,
+		RECTIFYINFO_AREA,
+		REPORTING_FILE,
+		RECTIFYINFO_NUMBER
+	</sql>
+	<sql id="FieldNickName">
+		r.RECTIFY_ID,
+		r.ORG_ID,
+		r.SORT,
+		r.ISDEL,
+		r.CREATER,
+		r.CREATE_DATE,
+		r.MODIFYER,
+		r.MODIFY_DATE,
+		r.FILE_CODE,
+		r.PROJECT_NAME,
+		r.IMG_URL,
+		r.HIDDEN_DANGER_INFO,
+		r.RECTIFY_MEASURES,
+		r.HIDDEN_DANGER_CLASSIFY,
+		r.HIDDEN_DANGER_LEVEL,
+		r.HIDDEN_DANGER_FACTOR,
+		r.IS_SUBMITE,
+		r.IS_COMPLETE,
+		r.COMPLETE_TIME,
+		r.PERSON_RESPONSIBLE,
+		r.RECTIFY_INVESTMENT,
+		r.PLAN_COMPLETE_TIME,
+		r.COMMIT_TIME,
+		r.YEAR,
+		r.MONTH,
+		r.DAY,
+		r.QUARTER,
+		r.REMARK,
+		r.RECTIFY_STAGE,
+		r.RESPONSIBLE_UNIT,
+		r.REPORTING_UNIT,
+		r.REPORTING_PERSON,
+		r.REPORTING_UNIT_FIRST,
+		r.REPORTING_PERSON_FIRST,
+		r.RECTIFYINFO_AREA,
+		r.REPORTING_FILE,
+		r.RECTIFYINFO_NUMBER
+	</sql>
+	
+	<!-- 字段值 -->
+	<sql id="FieldValue">
+		#{RECTIFY_ID},
+		#{ORG_ID},
+		#{SORT},
+		#{ISDEL},
+		#{CREATER},
+		#{CREATE_DATE},
+		#{MODIFYER},
+		#{MODIFY_DATE},
+		#{FILE_CODE},
+		#{PROJECT_NAME},
+		#{IMG_URL},
+		#{HIDDEN_DANGER_INFO},
+		#{RECTIFY_MEASURES},
+		#{HIDDEN_DANGER_CLASSIFY},
+		#{HIDDEN_DANGER_LEVEL},
+		#{HIDDEN_DANGER_FACTOR},
+		#{IS_SUBMITE},
+		#{IS_COMPLETE},
+		#{COMPLETE_TIME},
+		#{PERSON_RESPONSIBLE},
+		#{RECTIFY_INVESTMENT},
+		#{PLAN_COMPLETE_TIME},
+		#{COMMIT_TIME},
+		#{YEAR},
+		#{MONTH},
+		#{DAY},
+		#{QUARTER},
+		#{REMARK},
+		#{RECTIFY_STAGE},
+		#{RESPONSIBLE_UNIT},
+		#{REPORTING_UNIT},
+		#{REPORTING_PERSON},
+		#{REPORTING_UNIT_FIRST},
+		#{REPORTING_PERSON_FIRST},
+		#{RECTIFYINFO_AREA},
+		#{REPORTING_FILE},
+		#{RECTIFYINFO_NUMBER}
+	</sql>
+	
+	<!-- 新增-->
+	<insert id="save" parameterType="pd">
+		insert into 
+	<include refid="tableName"></include>
+		(
+	<include refid="Field"></include>
+		) values (
+	<include refid="FieldValue"></include>
+		)
+	</insert>
+	
+	<!-- 批量新增 -->
+	<insert id="batchSave" parameterType="pd">
+		insert into 
+			<include refid="tableName"></include>
+		(
+			<include refid="Field"></include>
+		) values 
+		<foreach collection ="list" item="item" index= "index" separator =",">
+			(
+				#{item.RECTIFY_ID},
+				#{item.ORG_ID},
+				#{item.SORT},
+				#{item.ISDEL},
+				#{item.CREATER},
+				#{item.CREATE_DATE},
+				#{item.MODIFYER},
+				#{item.MODIFY_DATE},
+				#{item.FILE_CODE},
+				#{item.PROJECT_NAME},
+				#{item.IMG_URL},
+				#{item.HIDDEN_DANGER_INFO},
+				#{item.RECTIFY_MEASURES},
+				#{item.HIDDEN_DANGER_CLASSIFY},
+				#{item.HIDDEN_DANGER_LEVEL},
+				#{item.HIDDEN_DANGER_FACTOR},
+				#{item.IS_SUBMITE},
+				#{item.IS_COMPLETE},
+				#{item.COMPLETE_TIME},
+				#{item.PERSON_RESPONSIBLE},
+				#{item.RECTIFY_INVESTMENT},
+				#{item.PLAN_COMPLETE_TIME},
+				#{item.COMMIT_TIME},
+				#{item.YEAR},
+				#{item.MONTH},
+				#{item.DAY},
+				#{item.QUARTER},
+				#{item.REMARK},
+				#{item.RECTIFY_STAGE},
+				#{item.RESPONSIBLE_UNIT},
+				#{item.REPORTING_UNIT},
+				#{item.REPORTING_PERSON},
+				#{item.REPORTING_UNIT_FIRST},
+				#{item.REPORTING_PERSON_FIRST},
+		    	#{item.RECTIFYINFO_AREA},
+				#{item.REPORTING_FILE},
+		    	#{item.RECTIFYINFO_NUMBER}
+			)
+		</foreach>
+	</insert>
+	
+	<!-- 删除-->
+	<delete id="delete" parameterType="pd">
+		update
+		<include refid="tableName"></include>
+		set 
+		 ISDEL = 1,
+		 MODIFYER = #{MODIFYER},
+		 MODIFY_DATE = #{MODIFY_DATE}
+		where 
+			RECTIFY_ID = #{RECTIFY_ID}
+	</delete>
+	
+	<!-- 修改 -->
+	<update id="edit" parameterType="pd">
+		update
+		<include refid="tableName"></include>
+		set 
+		 ORG_ID = #{ORG_ID},
+		 FILE_CODE = #{FILE_CODE},
+		 PROJECT_NAME = #{PROJECT_NAME},
+		 IMG_URL = #{IMG_URL},
+		 HIDDEN_DANGER_INFO = #{HIDDEN_DANGER_INFO},
+		 RECTIFY_MEASURES = #{RECTIFY_MEASURES},
+		 HIDDEN_DANGER_CLASSIFY = #{HIDDEN_DANGER_CLASSIFY},
+		 HIDDEN_DANGER_LEVEL = #{HIDDEN_DANGER_LEVEL},
+		 HIDDEN_DANGER_FACTOR = #{HIDDEN_DANGER_FACTOR},
+		 <if test="IS_SUBMITE != null and IS_SUBMITE != ''">
+		 	IS_SUBMITE = #{IS_SUBMITE},
+		 </if>
+		 <if test="IS_COMPLETE != null and IS_COMPLETE != ''">
+		 	IS_COMPLETE = #{IS_COMPLETE},
+		 </if>
+		 COMPLETE_TIME = #{COMPLETE_TIME},
+		 PERSON_RESPONSIBLE = #{PERSON_RESPONSIBLE},
+		 RECTIFY_INVESTMENT = #{RECTIFY_INVESTMENT},
+		 PLAN_COMPLETE_TIME = #{PLAN_COMPLETE_TIME},
+		
+		 <if test="COMMIT_TIME != null and COMMIT_TIME != ''">
+		 	COMMIT_TIME = #{COMMIT_TIME},
+		 </if>
+		 <if test="COMMIT_TIME != null and COMMIT_TIME != ''">
+		 	YEAR = #{YEAR},
+		 </if>
+		 <if test="COMMIT_TIME != null and COMMIT_TIME != ''">
+		 	MONTH = #{MONTH},
+		 </if>
+		 <if test="COMMIT_TIME != null and COMMIT_TIME != ''">
+		 	DAY = #{DAY},
+		 </if>
+		 <if test="COMMIT_TIME != null and COMMIT_TIME != ''">
+		 	QUARTER = #{QUARTER},
+		 </if>
+		<if test="RECTIFY_STAGE != null and RECTIFY_STAGE != ''">
+			RECTIFY_STAGE = #{RECTIFY_STAGE},
+		</if>
+		<if test="RESPONSIBLE_UNIT != null and RESPONSIBLE_UNIT != ''">
+			RESPONSIBLE_UNIT = #{RESPONSIBLE_UNIT},
+		</if>
+		<if test="REPORTING_UNIT != null and REPORTING_UNIT != ''">
+			REPORTING_UNIT = #{REPORTING_UNIT},
+		</if>
+		<if test="REPORTING_PERSON != null and REPORTING_PERSON != ''">
+			REPORTING_PERSON = #{REPORTING_PERSON},
+		</if>
+		<if test="REPORTING_UNIT_FIRST != null and REPORTING_UNIT_FIRST != ''">
+			REPORTING_UNIT_FIRST = #{REPORTING_UNIT_FIRST},
+		</if>
+		<if test="REPORTING_PERSON_FIRST != null and REPORTING_PERSON_FIRST != ''">
+			REPORTING_PERSON_FIRST = #{REPORTING_PERSON_FIRST},
+		</if>
+		<if test="RECTIFYINFO_AREA != null and RECTIFYINFO_AREA != ''">
+			RECTIFYINFO_AREA = #{RECTIFYINFO_AREA},
+		</if>
+		<if test="REPORTING_FILE != null and REPORTING_FILE != ''">
+			REPORTING_FILE = #{REPORTING_FILE},
+		</if>
+		<if test="RECTIFYINFO_NUMBER != null and RECTIFYINFO_NUMBER != ''">
+			RECTIFYINFO_NUMBER = #{RECTIFYINFO_NUMBER},
+		</if>
+		 REMARK = #{REMARK},
+		 MODIFYER = #{MODIFYER},
+		 MODIFY_DATE = #{MODIFY_DATE}
+			where
+				RECTIFY_ID = #{RECTIFY_ID}
+	</update>
+	
+	<!-- 通过ID获取数据 -->
+	<select id="findById" parameterType="pd" resultType="pd">
+		select
+			<include refid="FieldNickName"></include>,
+			o.ORG_NAME,q.NAME as AREA_NAME
+		from 
+			<include refid="tableName"></include> r
+			left join m_org o on o.ORG_ID = r.ORG_ID
+			left join sys_dictionaries q on q.DICTIONARIES_ID = r.RECTIFYINFO_AREA
+		where r.ISDEL =0 and
+			r.RECTIFY_ID = #{RECTIFY_ID}
+		<if test="RECTIFY_STAGE != null and RECTIFY_STAGE != ''">
+		and
+			r.RECTIFY_STAGE = #{RECTIFY_STAGE}
+		</if>
+	</select>
+
+	<!-- 通过流水号获取数据 -->
+	<select id="findByNumber" parameterType="pd" resultType="pd">
+		select
+		<include refid="FieldNickName"></include>,
+		o.ORG_NAME,q.NAME as AREA_NAME
+		from
+		<include refid="tableName"></include> r
+		left join m_org o on o.ORG_ID = r.ORG_ID
+		left join sys_dictionaries q on q.DICTIONARIES_ID = r.RECTIFYINFO_AREA
+		where r.ISDEL =0 and
+		r.RECTIFYINFO_NUMBER = #{RECTIFYINFO_NUMBER}
+		<if test="RECTIFY_STAGE != null and RECTIFY_STAGE != ''">
+			and
+			r.RECTIFY_STAGE = #{RECTIFY_STAGE}
+		</if>
+	</select>
+	
+	<!-- 列表 -->
+	<select id="datalistPage" parameterType="page" resultType="pd">
+		select
+			<include refid="FieldNickName"></include>,
+			o.ORG_NAME
+		from 
+			<include refid="tableName"></include> r
+			left join m_org o on o.ORG_ID = r.ORG_ID
+		where r.ISDEL =0 and r.ORG_ID is not null
+			<if test="pd.keywords!= null and pd.keywords != ''"><!-- 关键词检索 -->
+				and
+					(
+					<!--	根据需求自己加检索条件-->
+						o.ORG_NAME LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
+						 or 
+						r.FILE_CODE LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%') 
+						 or 
+						r.PROJECT_NAME LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%') 
+						 or 
+						r.HIDDEN_DANGER_INFO LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%') 
+						 or 
+						r.RECTIFY_MEASURES LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%') 
+						 or 
+						r.PERSON_RESPONSIBLE LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%') 
+						 or 
+						r.RECTIFY_INVESTMENT LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%') 
+						 or 
+						r.PLAN_COMPLETE_TIME LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%') 
+						 or 
+						r.COMMIT_TIME LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%') 
+						 or 
+						r.REMARK LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
+						 or
+						r.RECTIFYINFO_AREA LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
+						 or
+						r.RECTIFYINFO_NUMBER LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
+				)
+			</if>
+			
+			<!-- 判断组织权限ID -->
+			<if test="pd.USER_ID_QX != null and pd.USER_ID_QX != ''">
+				and r.ORG_ID in (
+					select ORG_ID from M_USER_ORG where USER_ID = #{pd.USER_ID_QX}
+				)
+
+			</if>
+			
+			<if test="pd.ORG_CODE != null and pd.ORG_CODE != ''">
+				and o.ORG_CODE LIKE CONCAT(#{ORG_CODE},'%')
+			</if>
+			<if test="pd.ORG_ID != null and pd.ORG_ID != ''">
+				and r.ORG_ID = #{pd.ORG_ID}
+			</if>
+			<if test="pd.HIDDEN_DANGER_CLASSIFY != null and pd.HIDDEN_DANGER_CLASSIFY != ''">
+				and r.HIDDEN_DANGER_CLASSIFY = #{pd.HIDDEN_DANGER_CLASSIFY}
+			</if>
+			<if test="pd.HIDDEN_DANGER_LEVEL != null and pd.HIDDEN_DANGER_LEVEL != ''">
+				and r.HIDDEN_DANGER_LEVEL = #{pd.HIDDEN_DANGER_LEVEL}
+			</if>
+			<if test="pd.HIDDEN_DANGER_FACTOR != null and pd.HIDDEN_DANGER_FACTOR != ''">
+				and r.HIDDEN_DANGER_FACTOR = #{pd.HIDDEN_DANGER_FACTOR}
+			</if>
+			<if test="pd.lastStart != null and pd.lastStart != ''">
+				and r.COMMIT_TIME &gt;= #{pd.lastStart}
+			</if>
+			<if test="pd.lastEnd != null and pd.lastEnd != ''">
+				and r.COMMIT_TIME &lt;= #{pd.lastEnd}
+			</if>
+			<if test="pd.IS_SUBMITE != null and pd.IS_SUBMITE != ''">
+				and r.IS_SUBMITE = #{pd.IS_SUBMITE}
+			</if>
+			<if test="pd.IS_COMPLETE != null and pd.IS_COMPLETE != ''">
+				and r.IS_COMPLETE = #{pd.IS_COMPLETE}
+			</if>
+			<if test="pd.RECTIFYINFO_NUMBER != null and pd.RECTIFYINFO_NUMBER != ''">
+				and r.RECTIFYINFO_NUMBER = #{RECTIFYINFO_NUMBER}
+			</if>
+			<if test = "pd.NOW != null and  pd.NOW != ''">
+				and (#{pd.NOW} &lt;= r.PLAN_COMPLETE_TIME and if(r.COMPLETE_TIME != '' and r.COMPLETE_TIME is not null ,r.COMPLETE_TIME &lt;= r.PLAN_COMPLETE_TIME,3=3)  )
+<!--				and (r.COMPLETE_TIME &gt; r.PLAN_COMPLETE_TIME or (#{pd.NOW} < r.PLAN_COMPLETE_TIME))-->
+			</if>
+			<if test = "pd.OVER_TIME != null and  pd.OVER_TIME != ''">
+				and (#{pd.OVER_TIME} > r.PLAN_COMPLETE_TIME and if(r.COMPLETE_TIME != '' and r.COMPLETE_TIME is not null ,r.COMPLETE_TIME &gt; r.PLAN_COMPLETE_TIME,3=3) )
+			</if>
+			<if test="pd.RECTIFY_STAGE != null and pd.RECTIFY_STAGE != ''">
+				and r.RECTIFY_STAGE = #{pd.RECTIFY_STAGE}
+			</if>
+			/*对应的公司看不到关于自己未提交的隐患*/
+			<if test="pd.SUBMIT_FLAG != null and pd.SUBMIT_FLAG != ''">
+				and (r.ORG_ID not in ( select ORG_ID from m_sys_user_org where USER_ID = #{pd.USER_ID_QX} ) or r.creater = #{pd.USER_ID_QX})
+			</if>
+			/*控制所有隐患中查到的数据，对应的公司看不到关于自己未提交的隐患*/
+			<if test="pd.ALL_SUBMIT_FLAG != null and pd.ALL_SUBMIT_FLAG != ''">
+				and ((r.ORG_ID not in ( select ORG_ID from M_USER_ORG where USER_ID = #{pd.USER_ID_QX} ) and r.RECTIFY_STAGE = 1 ) or r.RECTIFY_STAGE != 1)
+			</if>
+		order by IFNULL(r.modify_date,r.create_date) desc,sort asc
+	</select>
+	
+	<!-- 列表(全部) -->
+	<select id="listAll" parameterType="pd" resultType="pd">
+		select
+			<include refid="FieldNickName"></include>,
+			o.ORG_NAME
+		from 
+			<include refid="tableName"></include> r
+			left join m_org o on o.ORG_ID = r.ORG_ID
+		where r.ISDEL =0 
+			<if test="keywords!= null and keywords != ''"><!-- 关键词检索 -->
+				and
+					(
+					<!--	根据需求自己加检索条件-->
+						o.ORG_NAME LIKE CONCAT(CONCAT('%', #{keywords}),'%')
+						 or 
+						r.FILE_CODE LIKE CONCAT(CONCAT('%', #{keywords}),'%') 
+						 or 
+						r.PROJECT_NAME LIKE CONCAT(CONCAT('%', #{keywords}),'%') 
+						 or 
+						r.HIDDEN_DANGER_INFO LIKE CONCAT(CONCAT('%', #{keywords}),'%') 
+						 or 
+						r.RECTIFY_MEASURES LIKE CONCAT(CONCAT('%', #{keywords}),'%') 
+						 or 
+						r.PERSON_RESPONSIBLE LIKE CONCAT(CONCAT('%', #{keywords}),'%') 
+						 or 
+						r.RECTIFY_INVESTMENT LIKE CONCAT(CONCAT('%', #{keywords}),'%') 
+						 or 
+						r.PLAN_COMPLETE_TIME LIKE CONCAT(CONCAT('%', #{keywords}),'%') 
+						 or 
+						r.COMMIT_TIME LIKE CONCAT(CONCAT('%', #{keywords}),'%') 
+						 or 
+						r.REMARK LIKE CONCAT(CONCAT('%', #{keywords}),'%') 
+					)
+			</if>
+			
+			<!-- 判断组织权限ID -->
+			<if test="USER_ID_QX != null and USER_ID_QX != ''">
+				and r.ORG_ID in (
+					select ORG_ID from M_USER_ORG where USER_ID = #{USER_ID_QX}
+				)
+			</if>
+			
+			<if test="ORG_ID != null and ORG_ID != ''">
+				and r.ORG_ID = #{ORG_ID}
+			</if>
+			<if test="HIDDEN_DANGER_CLASSIFY != null and HIDDEN_DANGER_CLASSIFY != ''">
+				and r.HIDDEN_DANGER_CLASSIFY = #{HIDDEN_DANGER_CLASSIFY}
+			</if>
+			<if test="HIDDEN_DANGER_LEVEL != null and HIDDEN_DANGER_LEVEL != ''">
+				and r.HIDDEN_DANGER_LEVEL = #{HIDDEN_DANGER_LEVEL}
+			</if>
+			<if test="HIDDEN_DANGER_FACTOR != null and HIDDEN_DANGER_FACTOR != ''">
+				and r.HIDDEN_DANGER_FACTOR = #{HIDDEN_DANGER_FACTOR}
+			</if>
+			<if test="IS_COMPLETE != null and IS_COMPLETE != ''">
+				and r.IS_COMPLETE = #{IS_COMPLETE}
+			</if>
+			<if test="IS_SUBMITE != null and IS_SUBMITE != ''">
+				and r.IS_SUBMITE = #{IS_SUBMITE}
+			</if>
+			<if test = "NOW != null and  NOW != ''">
+				and (#{NOW} &lt;= r.PLAN_COMPLETE_TIME and if(r.COMPLETE_TIME != '' and r.COMPLETE_TIME is not null ,r.COMPLETE_TIME &lt;= r.PLAN_COMPLETE_TIME,3=3)  )
+				<!--				and (r.COMPLETE_TIME &gt; r.PLAN_COMPLETE_TIME or (#{pd.NOW} < r.PLAN_COMPLETE_TIME))-->
+			</if>
+			<if test = "OVER_TIME != null and  OVER_TIME != ''">
+				and (#{OVER_TIME} > r.PLAN_COMPLETE_TIME and if(r.COMPLETE_TIME != '' and r.COMPLETE_TIME is not null ,r.COMPLETE_TIME &gt; r.PLAN_COMPLETE_TIME,3=3) )
+			</if>
+			
+			<if test="lastStart != null and lastStart != ''">
+				and r.COMMIT_TIME &gt;= #{lastStart}
+			</if>
+			<if test="lastEnd != null and lastEnd != ''">
+				and r.COMMIT_TIME &lt;= #{lastEnd}
+			</if>
+			<if test="RECTIFY_STAGE != null and RECTIFY_STAGE != ''">
+				and r.RECTIFY_STAGE = #{RECTIFY_STAGE}
+			</if>
+			<if test="NO_RECTIFY_STAGE != null and NO_RECTIFY_STAGE != ''">
+				and r.RECTIFY_STAGE != #{NO_RECTIFY_STAGE}
+			</if>
+			<if test="PROJECT_NAME != null and PROJECT_NAME != ''">
+				and r.PROJECT_NAME = #{PROJECT_NAME}
+			</if>
+			<if test="RECTIFYINFO_NUMBER != null and RECTIFYINFO_NUMBER != ''">
+				and r.RECTIFYINFO_NUMBER = #{RECTIFYINFO_NUMBER}
+			</if>
+			<if test="date != null and date != ''">
+				and r.COMMIT_TIME > #{date}
+			</if>
+		order by IFNULL(r.modify_date,r.create_date) desc,sort asc
+	</select>
+	
+	<!-- 批量删除 -->
+	<delete id="deleteAll" parameterType="pd">
+		update
+		<include refid="tableName"></include>
+		set 
+		 ISDEL = 1,
+		 MODIFYER = #{MODIFYER},
+		 MODIFY_DATE = #{MODIFY_DATE}
+		where 
+			RECTIFY_ID in
+		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+				 #{item}
+		</foreach>
+	</delete>
+
+	<!-- 批量提交 -->
+	<delete id="submitAll" parameterType="pd">
+		update
+		<include refid="tableName"></include>
+		set
+		RECTIFY_STAGE = 2,
+		MODIFYER = #{MODIFYER},
+		MODIFY_DATE = #{MODIFY_DATE}
+		where
+		RECTIFY_ID in
+		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+	
+	<!-- 根据状态查询总数统计 -->
+	<select id="tongjiAll" parameterType="pd" resultType="pd">
+		select
+			IFNULL(sum(case when r.RECTIFY_STAGE != '1' then 1 else 0 end),0) as COUNT_ALL,
+			IFNULL(sum(case when r.RECTIFY_STAGE = '4' then 1 else 0 end),0) as IS_COMPLETE,
+			IFNULL(sum(case when (r.RECTIFY_STAGE != '4' and r.RECTIFY_STAGE != '1') then 1 else 0 end),0) as NOT_COMPLETE,
+			IFNULL(sum(case when (#{NOW} > r.PLAN_COMPLETE_TIME and if(r.COMPLETE_TIME != '' and r.COMPLETE_TIME is not null ,r.COMPLETE_TIME > r.PLAN_COMPLETE_TIME,3=3) ) and r.RECTIFY_STAGE != '1' then 1 else 0 end),0) as OVER_TIME,
+			IFNULL(sum(case when r.RECTIFY_STAGE = '1' then 1 else 0 end),0) as NOT_SUBMITE,
+			IFNULL(sum(case when r.HIDDEN_DANGER_LEVEL = '2' and r.RECTIFY_STAGE != '1' then 1 else 0 end),0) as ZHONG_DA,
+			IFNULL(sum(case when r.HIDDEN_DANGER_LEVEL = '1' and r.RECTIFY_STAGE != '1' then 1 else 0 end),0) as YI_BAN,
+			
+			IFNULL(sum(case when SUBSTR(r.commit_time,1,4) = #{YEAR} and r.RECTIFY_STAGE != '1' then 1 else 0 end),0) as YEAR,
+			IFNULL(sum(case when SUBSTR(r.commit_time,6,2) = #{MONTH} and r.RECTIFY_STAGE != '1' and SUBSTR(r.commit_time,1,4) = #{YEAR} then 1 else 0 end),0) as MONTH,
+		IFNULL(sum(case when cast(((SUBSTR(commit_time,6,2)+2)/3) as signed) = #{QUARTER} and r.RECTIFY_STAGE != '1' and SUBSTR(r.commit_time,1,4) = #{YEAR} then 1 else 0 end),0) as QUARTER
+		from 
+			<include refid="tableName"></include> r
+			left join M_ORG o on o.ORG_ID = r.ORG_ID
+		where r.ISDEL = 0 and r.ORG_ID is not null
+			<if test="ORG_CODE != null and ORG_CODE != ''">
+				and o.ORG_CODE LIKE CONCAT(#{ORG_CODE},'%')
+			</if>
+			<!-- 判断组织权限ID -->
+			<if test="USER_ID_QX != null and USER_ID_QX != ''">
+				and r.ORG_ID in (
+				select ORG_ID from M_USER_ORG where USER_ID = #{USER_ID_QX}
+				)
+			</if>
+	</select>
+	
+	<!-- 查询截至当天的数据 -->
+	<select id="tongjiUntil" parameterType="pd" resultType="pd">
+		select
+			IFNULL(sum(case when (RECTIFY_STAGE != '1' and r.RECTIFY_STAGE != '4') then 1 else 0 end),0) as zhenggaizhong,
+			IFNULL(sum(case when (RECTIFY_STAGE = '4' and (#{NOW} &lt;= r.PLAN_COMPLETE_TIME and if(r.COMPLETE_TIME != '' and r.COMPLETE_TIME is not null ,r.COMPLETE_TIME &lt;= r.PLAN_COMPLETE_TIME,3=3)  )) then 1 else 0 end),0) as zhenggaiwancheng,
+			IFNULL(sum(case when (RECTIFY_STAGE != '1' and plan_complete_time &lt; #{NOW})  then 1 else 0 end),0) as zhenggaiyuqi,
+			IFNULL(sum(case when (RECTIFY_STAGE = '4' and (#{NOW} > r.PLAN_COMPLETE_TIME and if(r.COMPLETE_TIME != '' and r.COMPLETE_TIME is not null ,r.COMPLETE_TIME &gt; r.PLAN_COMPLETE_TIME,3=3) )) then 1 else 0 end),0) as yuqiwancheng
+		from <include refid="tableName"></include> r
+			left join M_ORG o on o.ORG_ID = r.ORG_ID
+		where r.ISDEL = 0 and r.ORG_ID is not null
+			and (r.COMPLETE_TIME &lt;= #{NOW} or r.COMPLETE_TIME is null)
+			and r.COMMIT_TIME &lt;= #{NOW}
+		  	and r.RECTIFY_STAGE != '1'
+			
+			<if test="ORG_CODE != null and ORG_CODE != ''">
+				and o.ORG_CODE LIKE CONCAT(#{ORG_CODE},'%')
+			</if>
+	</select>
+	
+	<!-- 按隐患类别分类统计 -->
+	<select id="tongjiClassify" parameterType="pd" resultType="pd">
+		select
+			count(r.ORG_ID) as num,
+			r.HIDDEN_DANGER_CLASSIFY
+		from <include refid="tableName"></include>r
+			left join M_ORG o on o.ORG_ID = r.ORG_ID
+		where r.ISDEL = 0 and r.ORG_ID is not null
+			and r.RECTIFY_STAGE != '1'
+			<if test="ORG_CODE != null and ORG_CODE != ''">
+				and o.ORG_CODE LIKE CONCAT(#{ORG_CODE},'%')
+			</if>
+		group by r.HIDDEN_DANGER_CLASSIFY
+	</select>
+	
+	<!-- 按隐患因素统计 -->
+	<select id="tongjiFactor" parameterType="pd" resultType="pd">
+		select
+			count(r.ORG_ID) as num,
+			r.HIDDEN_DANGER_FACTOR
+		from <include refid="tableName"></include>r
+			left join M_ORG o on o.ORG_ID = r.ORG_ID
+		where r.ISDEL = 0 and r.ORG_ID is not null
+			and r.RECTIFY_STAGE != '1'
+			<if test="ORG_CODE != null and ORG_CODE != ''">
+				and o.ORG_CODE LIKE CONCAT(#{ORG_CODE},'%')
+			</if>
+		group by r.HIDDEN_DANGER_FACTOR
+	</select>
+	
+	<!-- 按单位统计 -->
+	<select id="tongjiByOrg" parameterType="pd" resultType="pd">
+		select
+			count(r.RECTIFY_ID) as num,
+			r.ORG_ID,
+			o.ORG_CODE
+		from <include refid="tableName"></include> r
+		left join M_ORG o on o.ORG_ID = r.ORG_ID
+		where r.ISDEL = 0 and r.ORG_ID is not null
+			and r.RECTIFY_STAGE != '1'
+			<if test="RECTIFY_STAGE != null and RECTIFY_STAGE != ''">
+				and r.RECTIFY_STAGE = #{RECTIFY_STAGE}
+			</if>
+		group by r.ORG_ID
+	</select>
+
+	<!-- 应急平台首页第二张隐患的地图 -->
+	<select id="tongjiRectifyMap" parameterType="pd" resultType="pd">
+		select
+			IFNULL(sum(case when a.hidden_danger_level = '2' then 1 else 0 end),0) as 'MORE',
+			IFNULL(sum(case when a.hidden_danger_level = '1' then 1 else 0 end),0) as 'NORMAL',
+			count(*) as 'value',
+			b.`NAME` as 'name',
+		    b.PARENT_ID,
+		    b.DICTIONARIES_ID
+		from
+			<include refid="tableName"></include>    a
+		LEFT JOIN
+			m_org c on a.project_name = c.org_id
+		LEFT JOIN
+			sys_dictionaries b on c.project_area = b.DICTIONARIES_ID
+		where
+		    a.isdel=0
+		<if test="DICTIONARIES_ID != null and DICTIONARIES_ID != ''">
+			and b.DICTIONARIES_ID = #{DICTIONARIES_ID}
+		</if>
+		GROUP BY b.`NAME`
+		ORDER BY b.ORDER_BY
+	</select>
+
+	<!-- 按rectifyinfo_stage统计 -->
+	<select id="tongjiByStage" parameterType="pd" resultType="pd">
+		SELECT
+			IFNULL(sum(case when (RECTIFY_STAGE != '1' and RECTIFY_STAGE != '4') then 1 else 0 end),0) as zhenggaizhong,
+			IFNULL(sum(case when (RECTIFY_STAGE = '4' and (#{NOW} &lt;= PLAN_COMPLETE_TIME and if(COMPLETE_TIME != '' and COMPLETE_TIME is not null ,COMPLETE_TIME &lt;= PLAN_COMPLETE_TIME,3=3)  )	) then 1 else 0 end),0) as zhenggaiwancheng,
+			IFNULL(sum(case when (RECTIFY_STAGE != '1' and (#{NOW} &gt; PLAN_COMPLETE_TIME and if(COMPLETE_TIME != '' and COMPLETE_TIME is not null ,COMPLETE_TIME &gt; PLAN_COMPLETE_TIME,3=3	) ) and RECTIFY_STAGE != '4')  then 1 else 0 end),0) as zhenggaiyuqi,
+			IFNULL(sum(case when (RECTIFY_STAGE = '4' and (#{NOW} > PLAN_COMPLETE_TIME and if(COMPLETE_TIME != '' and COMPLETE_TIME is not null ,COMPLETE_TIME &gt; PLAN_COMPLETE_TIME,3=3) )) then 1 else 0 end),0) as yuqiwancheng
+		FROM
+		    <include refid="tableName"></include>
+		where isdel = 0
+<!--		<if test="NOW != null and NOW != ''">-->
+<!--			and plan_complete_time > #{NOW}-->
+<!--		</if>-->
+	</select>
+
+	<!-- 按项目id进行统计 -->
+	<select id="tongjiByProject" parameterType="pd" resultType="pd">
+		SELECT
+		IFNULL(sum(case when (a.hidden_danger_level = '2') then 1 else 0 end),0) as more,
+		IFNULL(sum(case when (a.hidden_danger_level = '1') then 1 else 0 end),0) as normal
+		FROM
+		<include refid="tableName"></include> a
+		left join m_org b on a.project_name = b.org_id
+		where a.isdel = 0
+		  and b.isorg = 0
+		<if test="PROJECT_NAME != null and PROJECT_NAME != ''">
+			and a.project_name = #{PROJECT_NAME}
+		</if>
+
+	</select>
+
+	<!-- 按项目id进行隐患整改率统计 -->
+	<select id="tongjiByProjectOnPrecent" parameterType="pd" resultType="pd">
+		SELECT
+		IFNULL(sum(case when (a.rectify_stage = '4') then 1 else 0 end),0) as more,
+		count(*) as total
+		FROM
+		<include refid="tableName"></include> a
+		left join m_org b on a.project_name = b.org_id
+		where a.isdel = 0
+		and b.isorg = 0
+		<if test="PROJECT_NAME != null and PROJECT_NAME != ''">
+			and a.project_name = #{PROJECT_NAME}
+		</if>
+
+	</select>
+	
+	<!-- 查询明细总数 -->
+	<select id="findCount" parameterType="pd" resultType="pd">
+		select
+			count(*) zs
+		from 
+			<include refid="tableName"></include>
+		where ISDEL =0
+		<if test="date != null and date != ''">
+			and COMMIT_TIME > #{date}
+		</if>
+	</select>
+
+	<!-- 项目详情部分只获取对应字段 -->
+	<select id="listForProject" parameterType="pd" resultType="pd">
+		select
+		o.ORG_NAME as '组织机构',
+		r.HIDDEN_DANGER_INFO as '隐患情况',
+-- 		r.HIDDEN_DANGER_CLASSIFY as '隐患类别',
+-- 		r.HIDDEN_DANGER_LEVEL as '隐患级别',
+-- 		r.HIDDEN_DANGER_FACTOR as '隐患因素',
+		r.PLAN_COMPLETE_TIME as '整改期限',
+		a.ORG_NAME as '填报单位',
+		r.REPORTING_PERSON_FIRST as '填报人'
+		from
+		<include refid="tableName"></include> r
+		left join
+		    m_org o on o.ORG_ID = r.ORG_ID
+		left join
+		     m_org a on a.org_id = r.REPORTING_UNIT_FIRST
+		where r.ISDEL =0
+		<if test="PROJECT_NAME != null and PROJECT_NAME != ''">
+			and r.PROJECT_NAME = #{PROJECT_NAME}
+		</if>
+		order by IFNULL(r.modify_date,r.create_date)
+	</select>
+
+
+
+	<!-- 查找没有流水号的数据 -->
+	<select id="findByShort" parameterType="pd" resultType="pd">
+		select
+		r.RECTIFY_ID,
+		r.ORG_ID,
+		r.SORT,
+		r.ISDEL,
+		r.CREATER,
+		r.CREATE_DATE,
+		r.MODIFYER,
+		r.MODIFY_DATE,
+		r.FILE_CODE,
+		r.PROJECT_NAME,
+		r.IMG_URL,
+		r.HIDDEN_DANGER_INFO,
+		r.RECTIFY_MEASURES,
+		r.HIDDEN_DANGER_CLASSIFY,
+		r.HIDDEN_DANGER_LEVEL,
+		r.HIDDEN_DANGER_FACTOR,
+		r.IS_SUBMITE,
+		r.IS_COMPLETE,
+		r.COMPLETE_TIME,
+		r.PERSON_RESPONSIBLE,
+		r.RECTIFY_INVESTMENT,
+		r.PLAN_COMPLETE_TIME,
+		r.COMMIT_TIME,
+		r.YEAR,
+		r.MONTH,
+		r.DAY,
+		r.QUARTER,
+		r.REMARK,
+		r.RECTIFY_STAGE,
+		r.RESPONSIBLE_UNIT,
+		r.REPORTING_UNIT,
+		r.REPORTING_PERSON,
+		r.REPORTING_UNIT_FIRST,
+		r.REPORTING_PERSON_FIRST,
+		r.RECTIFYINFO_AREA,
+		r.REPORTING_FILE,
+		r.RECTIFYINFO_NUMBER,
+		o.org_name,o.org_name_short
+		from
+		<include refid="tableName"></include> r
+		LEFT JOIN
+		m_org o on r.org_id = o.org_id
+		where
+		r.isdel = 0
+		and
+		r.rectifyinfo_number is null or r.rectifyinfo_number = ''
+		order by r.CREATE_DATE,r.sort
+	</select>
+
+</mapper>

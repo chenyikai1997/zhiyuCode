@@ -1163,6 +1163,11 @@ public class RectifyInfoController extends BaseController {
 
 		pd.put("RECTIFY_STAGE",2);
 
+		if(pd.getString("OVER_TIME") != null &&!pd.getString("OVER_TIME").equals("")){
+			pd.remove("NOW");
+			pd.put("OVER_TIME",Tools.date2Str(new Date(),"yyyy-MM-dd"));
+		}
+
 		List<PageData> varOList = rectifyinfoService.listAll(pd);
 
 		//如果pd带有selectId就只下载被选中的部分
@@ -1321,6 +1326,11 @@ public class RectifyInfoController extends BaseController {
 //			dictionaries.setSubDict(subList);
 //		}
 
+		if(pd.getString("OVER_TIME") != null &&!pd.getString("OVER_TIME").equals("")){
+			pd.remove("NOW");
+			pd.put("OVER_TIME",Tools.date2Str(new Date(),"yyyy-MM-dd"));
+		}
+
 		List<PageData> varOList = rectifyinfoService.listAll(pd);
 
 		//如果pd带有selectId就只下载被选中的部分
@@ -1415,7 +1425,7 @@ public class RectifyInfoController extends BaseController {
 		return mv;
 	}
 
-	/**导出到excel(未完成)
+	/**导出到excel(已完成)
 	 * @param
 	 * @throws Exception
 	 */
@@ -1479,7 +1489,10 @@ public class RectifyInfoController extends BaseController {
 		}
 
 
-		//TODO 隐患权限控制
+		if(pd.getString("OVER_TIME") != null &&!pd.getString("OVER_TIME").equals("")){
+			pd.remove("NOW");
+			pd.put("OVER_TIME",Tools.date2Str(new Date(),"yyyy-MM-dd"));
+		}
 
 		//机构list
 		PageData param = new PageData();

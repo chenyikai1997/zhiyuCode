@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="MOrgMapper">
+	
+	<resultMap type="MOrg" id="morgResultMap">
+		<result column="ORG_ID" property="ORG_ID"/>
+		<result column="SORT" property="SORT"/>
+		<result column="ISDEL" property="ISDEL"/>
+		<result column="CREATER" property="CREATER"/>
+		<result column="CREATE_DATE" property="CREATE_DATE"/>
+		<result column="MODIFYER" property="MODIFYER"/>
+		<result column="MODIFY_DATE" property="MODIFY_DATE"/>
+		<result column="PARENT_ID" property="PARENT_ID"/>
+		<result column="ORG_CODE" property="ORG_CODE"/>
+		<result column="ORG_NAME" property="ORG_NAME"/>
+		<result column="ORG_NAME_SHORT" property="ORG_NAME_SHORT"/>
+		<result column="ORG_LEVEL" property="ORG_LEVEL"/>
+		<result column="ISORG" property="ISORG"/>
+		<result column="REMARK" property="REMARK"/>
+		<result column="PROJECT_UNIT" property="PROJECT_UNIT"/>
+		<result column="PROJECT_AREA" property="PROJECT_AREA"/>
+	</resultMap>
+	
+	<!--表名 -->
+	<sql id="tableName">
+		M_ORG
+	</sql>
+	
+	<!-- 字段 -->
+	<sql id="Field">
+         ORG_ID,
+         SORT,
+         ISDEL,
+         CREATER,
+         CREATE_DATE,
+         MODIFYER,
+         MODIFY_DATE,
+         PARENT_ID,
+         ORG_CODE,
+         ORG_NAME,
+         ORG_NAME_SHORT,
+         ORG_LEVEL,
+         ISORG,
+		 REMARK,
+		 PROJECT_UNIT,
+		 PROJECT_AREA
+	</sql>
+
+	<sql id="FieldNickName">
+		r.ORG_ID,
+         r.SORT,
+         r.ISDEL,
+         r.CREATER,
+         r.CREATE_DATE,
+         r.MODIFYER,
+         r.MODIFY_DATE,
+         r.PARENT_ID,
+         r.ORG_CODE,
+         r.ORG_NAME,
+         r.ORG_NAME_SHORT,
+         r.ORG_LEVEL,
+		 r.ISORG,
+		 r.REMARK,
+		 r.PROJECT_UNIT,
+		 r.PROJECT_AREA
+	</sql>
+	
+	<!-- 字段值 -->
+	<sql id="FieldValue">
+         #{ORG_ID},
+         #{SORT},
+         #{ISDEL},
+         #{CREATER},
+         #{CREATE_DATE},
+         #{MODIFYER},
+         #{MODIFY_DATE},
+         #{PARENT_ID},
+         #{ORG_CODE},
+         #{ORG_NAME},
+		 #{ORG_NAME_SHORT},
+         #{ORG_LEVEL},
+		 #{ISORG},
+		 #{REMARK},
+		 #{PROJECT_UNIT},
+		 #{PROJECT_AREA}
+	</sql>
+	
+	<!-- 新增-->
+	<insert id="save" parameterType="pd">
+		insert into 
+	<include refid="tableName"></include>
+		(
+	<include refid="Field"></include>
+		) values (
+	<include refid="FieldValue"></include>
+		)
+	</insert>
+	
+	<!-- 删除-->
+	<delete id="delete" parameterType="pd">
+		update
+		<include refid="tableName"></include>
+		set 
+		 ISDEL = 1,
+		 MODIFYER = #{MODIFYER},
+		 MODIFY_DATE = #{MODIFY_DATE}
+		where
+			ORG_ID = #{ORG_ID}
+	</delete>
+	
+	<!-- 修改 -->
+	<update id="edit" parameterType="pd">
+		update
+		<include refid="tableName"></include>
+		set 
+         ORG_ID = #{ORG_ID},
+         SORT = #{SORT},
+         ISDEL = #{ISDEL},
+         CREATER = #{CREATER},
+         CREATE_DATE = #{CREATE_DATE},
+         MODIFYER = #{MODIFYER},
+         MODIFY_DATE = #{MODIFY_DATE},
+         PARENT_ID = #{PARENT_ID},
+		<if test="ORG_CODE != null and  ORG_CODE != '' ">
+			ORG_CODE = #{ORG_CODE},
+		</if>
+		<if test="ORG_NAME != null and  ORG_NAME != '' ">
+			ORG_NAME = #{ORG_NAME},
+		</if>
+		<if test="ORG_NAME_SHORT != null and  ORG_NAME_SHORT != '' ">
+			ORG_NAME_SHORT = #{ORG_NAME_SHORT},
+		</if>
+		<if test="ORG_LEVEL != null and  ORG_LEVEL != '' ">
+			ORG_LEVEL = #{ORG_LEVEL},
+		</if>
+		<if test="MODIFYER != null and  MODIFYER != '' ">
+			MODIFYER = #{MODIFYER},
+		</if>
+		<if test="ISORG != null and  ISORG != '' ">
+		    ISORG = #{ISORG},
+		</if>
+		<if test="REMARK != null and  REMARK != '' ">
+			REMARK = #{REMARK},
+		</if>
+		<if test="PROJECT_UNIT != null and  PROJECT_UNIT != '' ">
+			PROJECT_UNIT = #{PROJECT_UNIT},
+		</if>
+		<if test="PROJECT_AREA != null and  PROJECT_AREA != '' ">
+			PROJECT_AREA = #{PROJECT_AREA},
+		</if>
+		 MODIFY_DATE = #{MODIFY_DATE}
+	        where
+				ORG_ID = #{ORG_ID}
+	</update>
+
+	<!-- 通过NAME获取数据 -->
+	<select id="findByName" parameterType="pd" resultType="pd">
+		select
+		<include refid="Field"></include>
+		from
+		<include refid="tableName"></include>
+		where ISDEL =0 and
+			ORG_NAME = #{ORG_NAME}
+
+	</select>
+	
+	<!-- 通过ID获取数据 -->
+	<select id="findById" parameterType="pd" resultType="pd">
+		select 
+		<include refid="Field"></include>
+		from 
+		<include refid="tableName"></include>
+		where ISDEL =0 and
+			ORG_ID = #{ORG_ID}
+	</select>
+	
+	<!-- 列表 -->
+	<select id="datalistPage" parameterType="page" resultType="pd">
+		select
+		<include refid="Field"></include>
+		from 
+		<include refid="tableName"></include>
+		where ISDEL =0
+		<if test="pd.ORG_ID != null and pd.ORG_ID != '' "><!-- 检索 -->
+				and PARENT_ID = #{pd.ORG_ID}
+		</if>
+		<if test="pd.ISORG != null">
+				and ISORG = #{pd.ISORG}
+		</if>
+		<if test="pd.PROJECT_UNIT != null and pd.PROJECT_UNIT != '' ">
+			and PROJECT_UNIT = #{pd.PROJECT_UNIT}
+		</if>
+		<if test="pd.PROJECT_ORG != null and pd.PROJECT_ORG != '' ">
+			and ORG_ID in(SELECT project_id FROM m_project_org where org_id = #{pd.PROJECT_ORG})
+		</if>
+		<if test="pd.keywords!= null and pd.keywords != ''"><!-- 关键词检索 -->
+				and
+				(
+				<!--	根据需求自己加检索条件-->
+				SORT LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
+				or
+				ORG_NAME LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
+				or
+				ORG_NAME_SHORT LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
+				or
+				ORG_ID LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
+				or
+				PARENT_ID LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
+				or
+				ORG_CODE LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
+				or
+				ORG_LEVEL LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
+				or ORG_ID in (select  a.PROJECT_ID from m_project_org a left join m_org b on a.org_id = b.org_id where org_name LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%'))
+				)
+		</if>
+
+		order by IFNULL(modify_date,create_date) desc
+
+	</select>
+	
+	<!-- 通过ID获取其子级列表 -->
+	<select id="listByParentId" parameterType="pd" resultMap="morgResultMap">
+		select
+			ORG_ID,
+			SORT,
+			ISDEL,
+			CREATER,
+			CREATE_DATE,
+			MODIFYER,
+			MODIFY_DATE,
+			PARENT_ID,
+			ORG_CODE,
+			ORG_NAME,
+			ORG_NAME_SHORT,
+			ORG_LEVEL,
+			ISORG,
+			PROJECT_UNIT,
+			PROJECT_AREA
+		from 
+		<include refid="tableName"></include>
+		where ISDEL =0
+		and
+			PARENT_ID = #{PARENT_ID}
+			<if test="ISORG != null">
+				and ISORG = #{ISORG}
+			</if>
+			<if test="USER_ID != null and USER_ID != ''">
+				and ORG_ID in (
+					select ORG_ID from M_USER_ORG where USER_ID = #{USER_ID}
+					union all
+					select ORG_ID from SYS_USER where USER_ID = #{USER_ID}
+				)
+			</if>
+		order by SORT,CREATE_DATE
+	</select>
+	
+	<!-- 列表(全部) -->
+	<select id="listAll" parameterType="pd" resultType="pd">
+		select
+		<include refid="Field"></include>
+		from 
+		<include refid="tableName"></include> 
+		where ISDEL =0
+		<if test="ISORG != null">
+			and ISORG = #{ISORG}
+		</if>
+		<if test="ORG_LEVEL != null and ORG_LEVEL != ''">
+			and ORG_LEVEL = #{ORG_LEVEL}
+		</if>
+		<if test="USER_ID != null and USER_ID != ''">
+			and ORG_ID in (
+					select ORG_ID from M_USER_ORG where USER_ID = #{USER_ID}
+					union all
+					select ORG_ID from SYS_USER where USER_ID = #{USER_ID}
+				)
+		</if>
+		<if test="date != null">
+			and CREATE_DATE > #{date}
+		</if>
+		<if test="PROJECT_UNIT != null and PROJECT_UNIT != ''">
+			and PROJECT_UNIT = #{PROJECT_UNIT}
+		</if>
+		order by sort,create_date
+		<if test="limitNum != null and limitNum != ''">
+		limit 11
+		</if>
+	</select>
+
+	<!--统计所有二级机构的风险点-->
+	<select id="listFengXian" parameterType="pd" resultType="pd">
+		select
+			IFNULL(sum(case when b.fengxian_level = '007001' then 1 else 0 end),0) as 'zd',
+			IFNULL(sum(case when b.fengxian_level = '007002' then 1 else 0 end),0) as 'jd',
+			IFNULL(sum(case when b.fengxian_level = '007003' then 1 else 0 end),0) as 'yb',
+			IFNULL(sum(case when b.fengxian_level = '007004' then 1 else 0 end),0) as 'dfx',
+			a.org_name,
+		    a.org_id
+		from
+		    <include refid="tableName"></include> a
+		left join m_fengxian b on a.ORG_ID=b.SECOND_UNIT
+		where b.ISDEL = 0
+		group by a.org_name
+	</select>
+
+	<!--统计所有项目-->
+	<select id="listProjectByArea" parameterType="pd" resultType="pd">
+		select
+			a.org_id as id,a.org_name as name
+		from
+		<include refid="tableName"></include> a
+		LEFT JOIN sys_dictionaries b on a.project_area = b.DICTIONARIES_ID
+		where a.ISDEL = 0 and a.isorg = 0
+		<if test="PROJECT_AREA != null and PROJECT_AREA != ''">
+			and a.PROJECT_AREA = #{PROJECT_AREA}
+		</if>
+	</select>
+
+
+	<!-- 通过编码查询重复数据 -->
+	<select id="duplicate" parameterType="pd" resultType="pd">
+		select
+		<include refid="Field"></include>
+		from
+		<include refid="tableName"></include>
+		where
+		ISDEL = 0 and
+		ORG_CODE = #{ORG_CODE}
+	</select>
+
+	<!-- 恢复标记删除的数据 -->
+	<update id="restore" parameterType="pd">
+		update
+		<include refid="tableName"></include>
+		set
+		ISDEL = 0
+		where
+		ORG_ID = #{ORG_ID}
+	</update>
+
+	<!-- 查询明细总数 -->
+	<select id="findCount" parameterType="pd" resultType="pd">
+		select
+		count(*) zs
+		from
+		<include refid="tableName"></include>
+		where ISDEL =0
+		<if test="date != null and date != ''">
+			and create_date > #{date}
+		</if>
+	</select>
+	
+</mapper>

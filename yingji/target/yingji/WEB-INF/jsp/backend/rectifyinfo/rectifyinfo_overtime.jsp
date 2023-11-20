@@ -557,7 +557,7 @@
       "IS_COMPLETE": $("#IS_COMPLETE").val(),
       "ORG_ID": $("#ORG_ID").val(),
       "selectId":str,
-      "overtime":"1"
+      "OVER_TIME":"1"
     }
     window.location.href='<%=basePath%>rectifyinfo/excel.do?' + $.param(param);
   }

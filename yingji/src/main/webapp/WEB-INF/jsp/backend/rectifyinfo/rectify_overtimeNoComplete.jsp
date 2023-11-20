@@ -95,7 +95,7 @@
                   <c:if test="${QX.cha == 1 }">
                     <td style="vertical-align:top;padding-left:2px"><a class="btn btn-light btn-xs" onclick="tosearch();"  title="检索"><i id="nav-search-icon" class="ace-icon fa fa-search bigger-110 nav-search-icon blue"></i></a></td>
                   </c:if>
-                  <%--                  <c:if test="${QX.cha == 1 }"><td style="vertical-align:top;padding-left:2px;"><a class="btn btn-light btn-xs" onclick="toExcel();" title="导出到EXCEL"><i id="nav-search-icon" class="ace-icon fa fa-download bigger-110 nav-search-icon blue"></i></a></td></c:if>--%>
+                                    <c:if test="${QX.cha == 1 }"><td style="vertical-align:top;padding-left:2px;"><a class="btn btn-light btn-xs" onclick="toExcel();" title="导出到EXCEL"><i id="nav-search-icon" class="ace-icon fa fa-download bigger-110 nav-search-icon blue"></i></a></td></c:if>
                   <%-- <c:if test="${QX.add == 1 }"><td style="vertical-align:top;padding-left:2px;"><a class="btn btn-light btn-xs" onclick="fromExcel();" title="从EXCEL导入"><i id="nav-search-icon" class="ace-icon fa fa-cloud-upload bigger-110 nav-search-icon blue"></i></a></td></c:if> --%>
                 </tr>
               </table>
@@ -547,6 +547,13 @@
 
   //导出excel
   function toExcel(){
+    var str = '';
+    for(var i=0;i < document.getElementsByName('ids').length;i++){
+      if(document.getElementsByName('ids')[i].checked){
+        if(str=='') str += document.getElementsByName('ids')[i].value;
+        else str += ',' + document.getElementsByName('ids')[i].value;
+      }
+    }
     var param = {
       "start": $("#start").val(),
       "end": $("#end").val(),
@@ -555,9 +562,11 @@
       "HIDDEN_DANGER_LEVEL": $("#HIDDEN_DANGER_LEVEL").val(),
       "HIDDEN_DANGER_FACTOR": $("#HIDDEN_DANGER_FACTOR").val(),
       "IS_COMPLETE": $("#IS_COMPLETE").val(),
-      "ORG_ID": $("#ORG_ID").val()
+      "ORG_ID": $("#ORG_ID").val(),
+      "OVER_TIME":"1",
+      "selectId":str,
     }
-    window.location.href='<%=basePath%>rectifyinfo/excel.do?' + $.param(param);
+    window.location.href='<%=basePath%>rectifyinfo/excelSNC.do?' + $.param(param);
   }
 
   //打开上传excel页面

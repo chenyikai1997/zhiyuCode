@@ -549,6 +549,13 @@
 
   //导出excel
   function toExcel(){
+    var str = '';
+    for(var i=0;i < document.getElementsByName('ids').length;i++){
+      if(document.getElementsByName('ids')[i].checked){
+        if(str=='') str += document.getElementsByName('ids')[i].value;
+        else str += ',' + document.getElementsByName('ids')[i].value;
+      }
+    }
     var param = {
       "start": $("#start").val(),
       "end": $("#end").val(),
@@ -558,7 +565,9 @@
       "HIDDEN_DANGER_FACTOR": $("#HIDDEN_DANGER_FACTOR").val(),
       "IS_COMPLETE": $("#IS_COMPLETE").val(),
       "ORG_ID": $("#ORG_ID").val(),
-      "tag":"all"
+      "tag":"sc",
+      "OVER_TIME":"1",
+      "selectId":str,
     }
     window.location.href='<%=basePath%>rectifyinfo/excelSC.do?' + $.param(param);
   }

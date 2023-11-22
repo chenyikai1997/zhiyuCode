@@ -209,14 +209,40 @@
         $(document).ready(function() {
             // 监听下拉选择框的change事件
             $('#fengxianSelect').change(function() {
-                var selectedValue = $(this).val();
-                if (selectedValue === 'all') {
+                // 获取选择的风险等级
+                var selectedFengxian = $(this).val();
+                var selectedArea = $('#areaSelect').val();
+                // 调用filterTable函数进行表格筛选
+                filterTable(selectedFengxian, selectedArea);
+            });
+
+            // 监听区域下拉框的change事件
+            $('#areaSelect').change(function() {
+                // 获取选择区域值
+                var selectedFengxian = $('#fengxianSelect').val();
+                var selectedArea = $(this).val();
+                // 调用filterTable函数进行表格筛选
+                filterTable(selectedFengxian, selectedArea);
+            });
+
+            function filterTable(fengxian, area) {
+                if (fengxian === 'all' && area === 'all') {
+                    // 如果风险等级和区域都为'all'，则显示所有行
                     $('#dataTable tbody tr').show();
                 } else {
+                    // 否则，隐藏所有行，然后根据条件逐行判断是否显示
                     $('#dataTable tbody tr').hide();
-                    $('#dataTable tbody tr td[subTitle="' + selectedValue + '"]').parent('tr').show();
+                    $('#dataTable tbody tr').each(function() {
+                        // 获取当前行的风险等级和区域值
+                        var trFengxianValue = $(this).attr('fengxian');
+                        var trAreaValue = $(this).attr('area');
+                        if ((fengxian === 'all' || trFengxianValue === fengxian) && (area === 'all' || trAreaValue === area)) {
+                            // 如果风险等级和区域与选择的值匹配，则显示该行
+                            $(this).show();
+                        }
+                    });
                 }
-            });
+            }
         });
     </script>
 </body>
